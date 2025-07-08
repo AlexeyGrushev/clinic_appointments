@@ -1,10 +1,16 @@
 from functools import lru_cache
 
+from typing import ClassVar
 from pydantic import model_validator
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    model_config: ClassVar[SettingsConfigDict] = {
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "extra": "ignore",
+    }
     # APP SETTINGS
     APP_NAME: str
     APP_PREFIX: str
@@ -31,11 +37,6 @@ class Settings(BaseSettings):
             + f"{v["DB_HOST"]}:{v["DB_PORT"]}/{v["DB_NAME"]}"
         )
         return v
-
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
-        encoding = "utf-8"
 
 
 @lru_cache()
