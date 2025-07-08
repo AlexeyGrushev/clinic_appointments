@@ -55,20 +55,15 @@ class FastAPIService:
         app_health = await self.__check_app_health()
         db_health = await self.__check_db_connectivity()
         status = app_health and db_health
-        if not status:
-            raise HTTPException(
-                status_code=503,
-                detail={
-                    "app_health": app_health,
-                    "db_health": db_health,
-                    "status": "unavailable",
-                },
-            )
-        return {
+        result = {
             "app_health": app_health,
             "db_health": db_health,
-            "status": "ok",
+            "status": "ok" if status else "unavailable",
         }
+        if not status:
+            raise HTTPException(status_code=503, detail=result)
+
+        return result
 
     async def start(self) -> None:
         uvicorn_cfg = uvicorn.Config(
