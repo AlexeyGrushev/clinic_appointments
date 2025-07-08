@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 
 from app.API.FastAPIService import FastAPIService
 from app.Core.Settings import settings
-from app.Logger import Logger
+from app.Core.Logger import Logger
 
 fastapi = FastAPIService(
     settings=settings,

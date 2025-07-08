@@ -4,6 +4,8 @@ from app.API.Appointments.Router import AppointmentRouter
 from datetime import datetime, timedelta, timezone
 from unittest.mock import AsyncMock
 
+from app.Core.Logger import Logger
+
 
 @pytest.fixture
 def mock_dao():
@@ -16,7 +18,11 @@ def router(mock_dao):
     return AppointmentRouter(
         dao=mock_dao,
         prefix="/api",
-        tags=["Appointments"]
+        tags=["Appointments"],
+        logger=Logger(
+            filename="fastapi-test.log",
+            level="DEBUG"
+        )
     )
 
 
