@@ -9,6 +9,7 @@ from alembic import context
 
 from app.Core.Settings import settings
 from app.DataBase.Base import Base
+
 # Import all models to ensure they are registered with SQLAlchemy
 from app.DataBase import models  # noqa
 
