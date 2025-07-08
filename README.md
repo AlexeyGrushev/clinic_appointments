@@ -61,8 +61,8 @@ CREATE TABLE "Appointment"(
     "id" BIGINT NOT NULL,
     "doctor_id" BIGINT NOT NULL,
     "client_id" BIGINT NOT NULL,
-    "start_time" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    "end_time" TIMESTAMP(0) WITHOUT TIME ZONE NULL,
+    "start_time" TIMESTAMP(0) WITH TIME ZONE NOT NULL,
+    "end_time" TIMESTAMP(0) WITH TIME ZONE NULL,
     "note" VARCHAR(255) NULL
 );
 ALTER TABLE
