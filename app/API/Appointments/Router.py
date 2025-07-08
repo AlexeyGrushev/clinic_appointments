@@ -1,4 +1,4 @@
-from sqlalchemy.exc import IntegrityError
+from fastapi.responses import JSONResponse
 
 from app.API.Appointments.DAO import AppointmentDAO
 from app.API.Appointments.schemas.AppointmentScheme import SAppointment
@@ -28,7 +28,8 @@ class AppointmentRouter(BaseRouter):
         data = await self.dao.find_one_or_none(id=appointment_id)
         if not data:
             raise http_exc_404_not_found
-        return {
+
+        appointment = {
             "id": data[0].id,
             "doctor_id": data[0].doctor_id,
             "client_id": data[0].client_id,
@@ -37,18 +38,25 @@ class AppointmentRouter(BaseRouter):
             "note": data[0].note,
         }
 
+        return appointment
+
     async def _add_appointment(self, data: SAppointment):
-        try:
-            appointment_id = await self.dao.insert_values(
-                doctor_id=data.doctor_id,
-                client_id=data.client_id,
-                start_time=data.start_time,
-                end_time=data.end_time,
-                note=data.note,
-            )
-        except IntegrityError:
+        existing = await self.dao.find_one_or_none(
+            doctor_id=data.doctor_id,
+            start_time=data.start_time,
+        )
+        if existing:
             raise http_exc_409_conflict
-        return appointment_id
+
+        appointment_id = await self.dao.insert_values(
+            doctor_id=data.doctor_id,
+            client_id=data.client_id,
+            start_time=data.start_time,
+            end_time=data.end_time,
+            note=data.note,
+        )
+
+        return JSONResponse(content={"id": appointment_id}, status_code=201)
 
     def get_router(self):
         return super().get_router()
