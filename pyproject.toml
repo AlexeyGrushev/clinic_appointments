@@ -1,0 +1,9 @@
+[tool.black]
+line-length = 79
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
+line_length = 79
+known_first_party = ["app"]
+skip = ["venv", "__pycache__", "migrations", "tests"]
