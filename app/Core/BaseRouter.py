@@ -1,23 +1,16 @@
 from abc import ABC, abstractmethod
 from enum import Enum
-from fastapi import APIRouter
-from typing import TypeVar, Generic
+from typing import Generic, TypeVar
 
-D = TypeVar('D')  # DAO
-S = TypeVar('S')  # Pydantic Scheme
+from fastapi import APIRouter
+
+D = TypeVar("D")  # DAO
+S = TypeVar("S")  # Pydantic Scheme
 
 
 class BaseRouter(ABC, Generic[D, S]):
-    def __init__(
-        self,
-        dao: D,
-        prefix: str,
-        tags: list[str | Enum]
-    ):
-        self.router = APIRouter(
-            prefix=prefix,
-            tags=tags
-        )
+    def __init__(self, dao: D, prefix: str, tags: list[str | Enum]):
+        self.router = APIRouter(prefix=prefix, tags=tags)
         self.dao = dao
         self._register_routes()
 

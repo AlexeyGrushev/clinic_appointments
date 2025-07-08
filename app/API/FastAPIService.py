@@ -1,5 +1,4 @@
 import uvicorn
-
 from fastapi import FastAPI
 
 from app.Core.Settings import Settings
@@ -20,9 +19,7 @@ class FastAPIService:
 
     async def start(self) -> None:
         uvicorn_cfg = uvicorn.Config(
-            self.app,
-            host=self.settings.APP_HOST,
-            port=self.settings.APP_PORT
+            self.app, host=self.settings.APP_HOST, port=self.settings.APP_PORT
         )
         server = uvicorn.Server(uvicorn_cfg)
 

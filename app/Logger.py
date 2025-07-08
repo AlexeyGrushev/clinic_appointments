@@ -7,21 +7,22 @@ class Logger(object):
     Logger class for handling logging in the application.
     This class can be modified to send logs to a log server.
     """
+
     level_relations = {
-        'debug': logging.DEBUG,
-        'info': logging.INFO,
-        'warning': logging.WARNING,
-        'error': logging.ERROR,
-        'crit': logging.CRITICAL
+        "debug": logging.DEBUG,
+        "info": logging.INFO,
+        "warning": logging.WARNING,
+        "error": logging.ERROR,
+        "crit": logging.CRITICAL,
     }
 
     def __init__(
         self,
         filename,
-        level='info',
-        when='D',
+        level="info",
+        when="D",
         backCount=3,
-        fmt='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'  # noqa
+        fmt="%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s",  # noqa
     ):
         self.logger = logging.getLogger(filename)
         format_str = logging.Formatter(fmt)
@@ -32,7 +33,7 @@ class Logger(object):
             filename=filename,
             when=when,
             backupCount=backCount,
-            encoding='utf-8'
+            encoding="utf-8",
         )
         th.setFormatter(format_str)
         self.logger.addHandler(console_handler)

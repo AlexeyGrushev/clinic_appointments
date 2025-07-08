@@ -1,7 +1,7 @@
+from functools import lru_cache
+
 from pydantic import model_validator
 from pydantic_settings import BaseSettings
-
-from functools import lru_cache
 
 
 class Settings(BaseSettings):
@@ -25,9 +25,11 @@ class Settings(BaseSettings):
     @model_validator(mode="before")
     @classmethod
     def get_database_url(cls, v):
-        v["DB_URL"] = "postgresql+asyncpg://" + \
-            f"{v["DB_USER"]}:{v["DB_PASS"]}@" + \
-            f"{v["DB_HOST"]}:{v["DB_PORT"]}/{v["DB_NAME"]}"
+        v["DB_URL"] = (
+            "postgresql+asyncpg://"
+            + f"{v["DB_USER"]}:{v["DB_PASS"]}@"
+            + f"{v["DB_HOST"]}:{v["DB_PORT"]}/{v["DB_NAME"]}"
+        )
         return v
 
     class Config:
