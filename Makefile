@@ -14,6 +14,10 @@ format:
 	@echo "Formatting code..."
 	black app/ && isort app/
 
+test:
+	@echo "Launching tests..."
+	python3 -m pytest --cov=app --cov-report=term tests/ -v
+
 makemigrations:
 ifeq ($(msg),)
 	$(error Please provide a message with 'msg="..."')
