@@ -21,8 +21,8 @@ client = TestClient(fastapi.app)
 def appointment_payload():
     now = datetime.now(timezone.utc)
     return {
-        "doctor_id": 1,
-        "client_id": 2,
+        "doctor_id": 0,
+        "client_id": 0,
         "start_time": now.isoformat(),
         "end_time": (now + timedelta(minutes=15)).isoformat(),
         "note": "Integration test",
