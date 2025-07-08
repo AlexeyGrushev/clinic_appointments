@@ -7,6 +7,7 @@ class ClinicAppointments:
 
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
+
         self.__fastapi_service = FastAPIService(
             settings=self.settings,
             logger=Logger(
