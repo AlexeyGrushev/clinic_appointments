@@ -46,8 +46,8 @@ class FastAPIService:
         self.logger.debug("Checking database connectivity")
         try:
             model = AppointmentDAO()
-            result = await model.find_max_id()
-            if isinstance(result.fetchone()[0], int):
+            result = await model.ping()
+            if result == 1:
                 self.logger.debug("Database connectivity check passed")
                 return True
             else:
@@ -61,7 +61,6 @@ class FastAPIService:
 
     async def __check_app_health(self) -> bool:
         self.logger.debug("Checking app health")
-        # можно добавить логику проверки
         return True
 
     async def _health_check(self) -> dict[str | Any, Any]:
