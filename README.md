@@ -77,4 +77,85 @@ ALTER TABLE
 ![Activity-Диаграмма](https://i.ibb.co/BV0dLSx8/Activity.png)
 
 # Запуск проекта
-Будет позже...
+
+## Быстрый Запуск (prod)
+```bash
+git clone https://github.com/AlexeyGrushev/clinic_appointments.git
+
+cp .env.example .env # Можно задать свои значения окружения
+
+make up # Или: docker compose --env-file .env up -d --build
+```
+
+## Запуск Development Версии
+```bash
+# Use python 3.12
+git clone https://github.com/AlexeyGrushev/clinic_appointments.git
+
+cd clinic_appointments
+
+cp .env.example .env # Задаем переменные окружения базы данных
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+make req-dev
+
+python3 main.py
+```
+
+# Команды Make
+В проекте доступны команды Makefile. Их запуск и значение:
+
+## Управление сервисами
+
+### `make up`
+Запускает все Docker-сервисы в фоновом режиме с пересборкой контейнеров
+
+### `make down`
+Останавливает и удаляет все Docker-сервисы
+
+## Проверка кода
+
+### `make lint`
+Проверяет код на соответствие стилю и форматированию
+
+### `make format`
+Автоматически форматирует код согласно стандартам
+
+## Тестирование
+
+### `make test`
+Запускает тесты с выводом информации о покрытии кода
+
+## Работа с базой данных
+
+### `make makemigrations msg="описание"`
+Создает новые миграции для базы данных (требует указания сообщения)
+
+### `make migrate`
+Применяет все ожидающие миграции базы данных
+
+## Обслуживание
+
+### `make healthcheck`
+Проверяет работоспособность сервиса
+
+### `make clean`
+Удаляет временные файлы и кэш Python
+
+## Управление зависимостями
+
+### `make req`
+Устанавливает основные зависимости проекта
+
+### `make req-dev`
+Устанавливает зависимости для разработки
+
+### `make req-del`
+Удаляет зависимости для разработки
+
+---
+
+*Проект является технической демонстрацией, не используется в реальном Production и распространяется по лицензии GNU GPL v3*

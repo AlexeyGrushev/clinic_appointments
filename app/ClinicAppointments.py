@@ -1,6 +1,6 @@
 from app.API.FastAPIService import FastAPIService
+from app.Core.Logger import Logger
 from app.Core.Settings import Settings
-from app.Logger import Logger
 
 
 class ClinicAppointments:

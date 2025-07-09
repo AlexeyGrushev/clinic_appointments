@@ -6,4 +6,4 @@ target-version = ['py312']
 profile = "black"
 line_length = 79
 known_first_party = ["app"]
-skip = ["venv", "__pycache__", "migrations", "tests"]
+skip = ["venv", "__pycache__", "./app/DataBase/migrations", "tests"]

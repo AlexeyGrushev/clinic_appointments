@@ -9,10 +9,12 @@ class BaseRouter(ABC):
         self,
         tags: list,
         prefix: str,
+        logger: Any,
         dao: Any = None,
     ):
         self._router = APIRouter(prefix=prefix, tags=tags)
         self.dao = dao
+        self.logger = logger
         self._register_routes()
 
     @abstractmethod
