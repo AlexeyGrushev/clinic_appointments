@@ -1,6 +1,6 @@
 up:
 	@echo "Starting services..."
-	docker compose up -d --build
+	docker compose --env-file .env up -d --build
 
 down:
 	@echo "Stopping services..."
@@ -38,3 +38,15 @@ clean:
 	find . -type d -name "__pycache__" -exec rm -r {} +
 	rm -rf .pytest_cache
 	rm -rf .mypy_cache
+
+req:
+	@echo "Installing dependencies..."
+	pip install -r requirements.txt
+
+req-dev:
+	@echo "Installing development dependencies..."
+	pip install -r requirements-dev.txt
+
+req-del:
+	@echo "Removing dependencies..."
+	pip uninstall -r requirements-dev.txt -y
