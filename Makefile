@@ -1,6 +1,6 @@
 up:
 	@echo "Starting services..."
-	docker compose up -d --build
+	docker compose --env-file .env up -d --build
 
 down:
 	@echo "Stopping services..."
